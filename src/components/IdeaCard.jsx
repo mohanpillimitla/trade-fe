@@ -51,7 +51,7 @@ export default function IdeaCard(props) {
         </Stack>
 
         <hr />
-        <Stack direction="column" justifyContent="space-between" spacing={0}>
+        <Stack direction="row" justifyContent="space-between" spacing={0}>
           <Typography variant="title" gutterBottom>
             {name_of_the_idea}
           </Typography>
@@ -59,14 +59,16 @@ export default function IdeaCard(props) {
             variant="contained"
             size="small"
             disabled={is_subscribed}
-            onClick={(e)=>subscribe(flag,id)}
+            onClick={(e) => subscribe(flag, id)}
           >
             {!is_subscribed ? "Join this idea" : "joined"}
           </Button>
         </Stack>
-      </CardContent>
-      <CardActions>
-        <Stack direction="row" justifyContent="space-between" spacing={2}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          sx={{ marginBottom: 5 }}
+        >
           <Button
             variant="contained"
             size="small"
@@ -80,18 +82,32 @@ export default function IdeaCard(props) {
             {risk_category}
           </Button>
         </Stack>
-        <stack direction="row" justifyContent="space-between" spacing={4}>
-          <Typography color="blue">Enter below</Typography>
-          <Typography color="blue">
-            {up_or_down_side_in_percent * book_profit_near}
-          </Typography>
-          <Typography color="blue">Book proft near</Typography>
-          <Typography color="blue">{book_profit_near}</Typography>
-          <Typography color="blue"></Typography>
-          <Typography color="blue">stop loss at</Typography>
-          <Typography color="blue">{stoploss_at}</Typography>
-        </stack>
-      </CardActions>
+        <Grid container direction="row" spacing={10}>
+          <Grid item xs={6}>
+            <Typography>Enter below</Typography>
+            <Typography>Book proft near</Typography>
+            <Typography>stop loss at</Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography
+              color="blue"
+              style={{ alignItems: "flex-end", float: "right" }}
+            >
+              {up_or_down_side_in_percent * book_profit_near}
+            </Typography>
+            <div></div>
+            <Typography color="blue" style={{ float: "right", clear: "right" }}>
+              {book_profit_near}
+            </Typography>
+            <Typography
+              color="blue"
+              style={{ alignItems: "flex-end", float: "right", clear: "right" }}
+            >
+              {stoploss_at}
+            </Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
     </Card>
   );
 }

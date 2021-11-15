@@ -41,12 +41,16 @@ export default function App() {
   };
   const subscribe = async (flag, id) => {
     axios
-      .put(`http://localhost:8001/idea/create_ideas/${id}/`,{subscriber:[id]}, {
-        headers: {
-          Authorization: `JWT ${userData && userData["token"]}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .put(
+        `http://localhost:8001/idea/create_ideas/${id}/`,
+        { subscriber: [userData.user.id] },
+        {
+          headers: {
+            Authorization: `JWT ${userData && userData["token"]}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => (!flag ? getMyIdeas() : getAllIdeas()));
   };
 
