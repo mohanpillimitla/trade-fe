@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router";
+import CreateIdea from "../components/CreateIdea";
 export default function NavBar(props) {
   const navigate = useNavigate();
 
@@ -19,9 +20,8 @@ export default function NavBar(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             TradeApp
           </Typography>
-          <Button color="inherit" onClick={() => navigate("/home")}>
-            addItem
-          </Button>
+          <CreateIdea addIdea={props.addIdea} />
+
           <Button color="inherit" onClick={() => navigate("/home")}>
             home
           </Button>

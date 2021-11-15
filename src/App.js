@@ -53,6 +53,17 @@ export default function App() {
       )
       .then((res) => (!flag ? getMyIdeas() : getAllIdeas()));
   };
+  const addIdea = async (payload) => {
+    payload["created_by"] = userData.user.id;
+    axios
+      .post("http://localhost:8001/idea/create_ideas/", payload, {
+        headers: {
+          Authorization: `JWT ${userData && userData["token"]}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => (getMyIdeas(), getAllIdeas()));
+  };
 
   const [userData, setUserData] = useState(null);
   const [AllIdeas, SetAllIdeas] = useState(null);
@@ -66,7 +77,7 @@ export default function App() {
       alignSelf="center"
       spacing={2}
     >
-      <NavBar username={userData && userData.user.username} />
+      <NavBar username={userData && userData.user.username} addIdea={addIdea} />
       <Routes>
         <Route path="/" element={<Login login={login} />} />
         <Route
